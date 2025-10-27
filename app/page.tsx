@@ -1,4 +1,4 @@
-import LogoutButton from "./logout-button";
+import LogoutButton from "../components/auth/logout-button";
 import { requireLoggedIn } from "@/lib/auth-utils";
 import { caller } from "@/trpc/server";
 import { notFound } from "next/navigation";

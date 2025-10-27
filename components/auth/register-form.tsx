@@ -189,7 +189,7 @@ export const RegisterForm = () => {
                 className="w-full"
                 disabled={form.formState.isSubmitting}
               >
-                Register
+                {form.formState.isSubmitting ? "Registering..." : "Register"}
               </Button>
             </form>
           </Form>
