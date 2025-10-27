@@ -1,5 +1,6 @@
 import LogoutButton from "./logout-button";
 import { requireLoggedIn } from "@/lib/auth-utils";
+import { caller } from "@/trpc/server";
 import { notFound } from "next/navigation";
 
 export default async function Home() {
@@ -7,9 +8,11 @@ export default async function Home() {
   if (!session) {
     return notFound();
   }
+  const user = await caller.getMyUser();
+
   return (
     <div>
-      <h1>{session?.user.name}</h1>
+      <h1>{JSON.stringify(user)}</h1>
       <LogoutButton />
     </div>
   );
