@@ -25,6 +25,8 @@ import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { Checkbox } from "../ui/checkbox";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const loginFormSchema = z.object({
   email: z.email({ message: "Invalid email address" }),
@@ -69,6 +71,7 @@ export const LoginForm = () => {
       },
     );
   };
+  const { resolvedTheme: theme } = useTheme();
   return (
     <div className="flex flex-col gap-6">
       <Card>
@@ -90,6 +93,12 @@ export const LoginForm = () => {
                   className="w-full"
                   disabled={form.formState.isSubmitting}
                 >
+                  <Image
+                    src="/google.svg"
+                    alt="Google"
+                    width={20}
+                    height={20}
+                  />
                   Continue with Google
                 </Button>
                 <Button
@@ -98,6 +107,12 @@ export const LoginForm = () => {
                   className="w-full"
                   disabled={form.formState.isSubmitting}
                 >
+                  <Image
+                    src={theme === "dark" ? "/github-white.png" : "/github.svg"}
+                    alt="Github"
+                    width={20}
+                    height={20}
+                  />
                   Continue with Github
                 </Button>
               </div>
@@ -156,7 +171,7 @@ export const LoginForm = () => {
                 className="w-full"
                 disabled={form.formState.isSubmitting}
               >
-                Login
+                {form.formState.isSubmitting ? "Logging in..." : "Login"}
               </Button>
             </form>
           </Form>
