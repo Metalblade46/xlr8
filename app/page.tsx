@@ -8,11 +8,11 @@ export default async function Home() {
   if (!session) {
     return notFound();
   }
-  const user = await caller.getMyUser();
+  const workflows = await caller.getWorkflows();
 
   return (
     <div>
-      <h1>{JSON.stringify(user)}</h1>
+      <h1>{JSON.stringify(workflows)}</h1>
       <LogoutButton />
     </div>
   );
