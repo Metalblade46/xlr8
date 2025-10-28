@@ -1,0 +1,5 @@
+procs:
+  prisma:studio:
+    cmd: ["bun", "run", "prisma:studio"]
+  nextjs:
+    cmd: ["bun", "run", "dev"]
