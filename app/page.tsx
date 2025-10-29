@@ -2,6 +2,7 @@ import LogoutButton from "../components/auth/logout-button";
 import { requireLoggedIn } from "@/lib/auth-utils";
 import { caller } from "@/trpc/server";
 import { notFound } from "next/navigation";
+import TestAIButton from "@/components/test-ai-button";
 
 export default async function Home() {
   const session = await requireLoggedIn();
@@ -13,6 +14,7 @@ export default async function Home() {
   return (
     <div>
       <h1>{JSON.stringify(workflows)}</h1>
+      <TestAIButton />
       <LogoutButton />
     </div>
   );
