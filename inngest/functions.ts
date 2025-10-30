@@ -1,5 +1,6 @@
 import { inngest } from "./client";
 import { createAgent, gemini } from '@inngest/agent-kit';
+import * as Sentry from "@sentry/nextjs";
 
 export const helloWorld = inngest.createFunction(
     { id: "hello-world" },
@@ -23,8 +24,20 @@ export const testAi = inngest.createFunction(
             }),
         })
         await step.sleep("wait-a-moment", "5s");
-        const response = await mathsAgent.run("What is 2 + 2?")
-        return response
-
+        console.log('User triggered test log', { log_source: 'sentry_test' })
+        const response = await Sentry.startSpan({
+            op: "maths-agent",
+            name: "gemini-2.5-flash",
+            attributes: {
+                "agent": "maths-agent",
+                "model": "gemini-2.5-flash",
+            },
+        }, async (span) => {
+            const response = await mathsAgent.run("What is 2 + 2?");
+            span.setAttribute("response", JSON.stringify(response));
+            return response;
+        });
+        // const response = await mathsAgent.run("What is 2 + 2?");
+        return response;
     }
 )
