@@ -25,6 +25,8 @@ import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import Image from "next/image";
+import { useTheme } from "next-themes";
 
 const registerFormSchema = z
   .object({
@@ -52,6 +54,7 @@ const registerFormSchema = z
 
 export const RegisterForm = () => {
   const router = useRouter();
+  const { theme } = useTheme();
   const form = useForm<z.infer<typeof registerFormSchema>>({
     resolver: zodResolver(registerFormSchema),
     defaultValues: {
@@ -109,6 +112,12 @@ export const RegisterForm = () => {
                   className="w-full"
                   disabled={form.formState.isSubmitting}
                 >
+                  <Image
+                    src="/google.svg"
+                    alt="Google"
+                    width={20}
+                    height={20}
+                  />
                   Continue with Google
                 </Button>
                 <Button
@@ -117,6 +126,12 @@ export const RegisterForm = () => {
                   className="w-full"
                   disabled={form.formState.isSubmitting}
                 >
+                  <Image
+                    src={theme === "dark" ? "/github-white.png" : "/github.svg"}
+                    alt="Github"
+                    width={20}
+                    height={20}
+                  />
                   Continue with Github
                 </Button>
               </div>

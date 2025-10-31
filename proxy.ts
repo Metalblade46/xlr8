@@ -16,5 +16,5 @@ export async function proxy(request: NextRequest) {
 }
 
 export const config = {
-    matcher: ["/"], // Specify the routes the middleware applies to
+    matcher: ['/((?!api|login|register|_next/static|_next/image|.*\\.png$ |.*\\.svg$).*)'], // Specify the routes the middleware applies to
 };
